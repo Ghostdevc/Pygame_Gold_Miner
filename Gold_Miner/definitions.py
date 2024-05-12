@@ -1,4 +1,6 @@
 import pygame
+
+pygame.init()
 def load_images(filepaths, is2x = False):
     images = []
     for filepath in filepaths:
@@ -10,6 +12,9 @@ def load_images(filepaths, is2x = False):
 
 #Game Setting
 
+clock = pygame.time.Clock()
+
+FPS = 60
 
 screen_width = 1280
 screen_height = 820
@@ -46,8 +51,8 @@ miner_images = load_images(miner_files)
 # Angry man
 
 shopkeeper_files = [
-    "./assets/images/shopkeeper_01.png",
-    "./assets/images/shopkeeper_02.png"
+    "./assets/images/angryman_01.png",
+    "./assets/images/angryman_02.png"
 ]
 
 shopkeeper_images = load_images(shopkeeper_files)
@@ -108,7 +113,6 @@ store_BG = pygame.image.load('./assets/images/bg_shop.png')
 
 #Sounds
 pygame.mixer.pre_init(frequency=11025, size=-16, channels=8, buffer=2048)
-pygame.init()
 explosive_sound = pygame.mixer.Sound('./assets/audios/explosive.wav')
 goal_sound = pygame.mixer.Sound('./assets/audios/goal.wav')
 grab_back_sound = pygame.mixer.Sound('./assets/audios/grab_back.wav')
