@@ -45,12 +45,12 @@ miner_images = load_images(miner_files)
 
 # Angry man
 
-angryman_files = [
-    "./assets/images/angryman_01.png",
-    "./assets/images/angryman_02.png"
+shopkeeper_files = [
+    "./assets/images/shopkeeper_01.png",
+    "./assets/images/shopkeeper_02.png"
 ]
 
-angryman_images = load_images(angryman_files)
+shopkeeper_images = load_images(shopkeeper_files)
 
 #Patlama
 explosive_files = [
@@ -78,7 +78,7 @@ panel_image = pygame.image.load('./assets/images/panel.png')
 table_image = pygame.image.load('./assets/images/shop_table.png')
 dialog_image = pygame.image.load('./assets/images/ui_dialog.png')
 
-#contiune ve hight score eklenecek
+
 
 #Shop item
 
@@ -132,3 +132,6 @@ Mole_point = 5
 MoleWithDiamond_point = 605
 Skull_point = 20
 Bone_point = 5
+
+
+#contiune ve hight score eklenecek
