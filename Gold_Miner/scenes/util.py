@@ -91,10 +91,6 @@ def load_items(items_data, is_clover=False, is_gem=False, is_rock=False):
         items.append(load_item(item, is_clover, is_gem, is_rock))
     return items
 
-def load_sound(sound_name):
-    sound_path = os.path.join("assets", "sounds", f"{sound_name}.wav")
-    return pygame.mixer.Sound(sound_path)
-
 # Seviye yükleme işlemi
 def load_level(level, is_clover, is_gem, is_rock):
     bg_name = None
@@ -171,7 +167,7 @@ def draw_point(rope,dt,miner):
                 if rope.text_size <= 0:  # Reached right boundary, change direction
                     miner.state = 3
                     rope.text_direction = "None"
-        text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), int(rope.text_size))
+        text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), int(rope.text_size))
         screen.blit(text_font.render("Sức mạnh", True, (0, 15, 0)), (rope.x_text, rope.y_text))
     elif rope.text != "" and rope.x_text > 120 and rope.text_direction !="None": # show tiền
         rope.time_text -= dt
@@ -184,7 +180,7 @@ def draw_point(rope,dt,miner):
             rope.text_size -= dt*rope.speed /(25)
         if rope.time_text < 0:
             rope.x_text -= dt*rope.speed
-        text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), int(rope.text_size))
+        text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), int(rope.text_size))
         screen.blit(text_font.render("+$"+rope.text, True, (0, 15, 0)), (rope.x_text, rope.y_text))
 
 def blit_text(surface, text, pos, font, color=pygame.Color('black')):

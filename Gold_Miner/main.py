@@ -8,7 +8,7 @@ def main():
     pygame.init()
     running = True
     manager = SceneMananger()
-    font = pygame.font.Font(os.path.join("assets", "fonts", 'Teachers Students.otf'), 28)
+    font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), 28)
     while running:
         if pygame.event.get(pygame.QUIT):
             write_high_score(get_score())

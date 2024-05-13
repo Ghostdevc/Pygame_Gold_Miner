@@ -1,3 +1,5 @@
+import os
+
 from entities.miner import Miner
 from entities.rope import Rope
 from entities.explosive import Explosive
@@ -19,7 +21,7 @@ class SceneMananger(object):
 class StartScene(object):
     def __init__(self):
         super(StartScene, self).__init__()
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teachers Students.otf'), 48)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), 48)
         self.button = Button(120,20,gold_image,2)
         self.higt_score_btn = Button(80,500,hight_score,1)
     def render(self, screen):
@@ -43,9 +45,9 @@ class StartScene(object):
 class FinishScene(object):
     def __init__(self):
         super(FinishScene, self).__init__()
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 28)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), 28)
         load_sound("goal_sound")
-    def render(self, screen):
+    def render(self, screen, text_game_image=None):
         screen.blit(cut_scene,(0,0))
         screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
         screen.blit(text_game_image,text_game_image.get_rect(center = (screen_width/2,200)))
@@ -64,7 +66,7 @@ class FailureScene(object):
         super(FailureScene, self).__init__()
         write_high_score(get_score())
         load_sound("made_goal_sound")
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 24)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), 24)
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
         screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
@@ -83,7 +85,7 @@ class WinScene(object):
         super(WinScene, self).__init__()
         write_high_score(get_score())
         load_sound("goal_sound")
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 24)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), 24)
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
         screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
@@ -100,7 +102,7 @@ class WinScene(object):
 class HighScoreScene(object):
     def __init__(self):
         super(HighScoreScene, self).__init__()
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 24)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), 24)
         self.continute = Button(1050,50,continue_img,0.5)
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
@@ -119,7 +121,7 @@ class HighScoreScene(object):
 class StoreScene(object):
     def __init__(self):
         super(StoreScene, self).__init__()
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 28)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), 28)
         self.shopkeeper = Shopkeeper(900,250)
         self.continute = Button(1050,50,continue_img,0.5)
 
@@ -249,12 +251,12 @@ class GameScene(Scene):
         super(GameScene, self).__init__()
         self.level = level
         self.miner = Miner(620, -7, 5)
-        self.rope = Rope(643, 45, 300, hoo_images, tnt, speed)
+        self.rope = Rope(643, 45, 300, hook_images, tnt, speed)
         self.bg, self.items = load_level(random_level(self.level), is_clover, is_gem, is_rock)
         # self.bg,self.items = load_level("LDEBUG")
         self.play_Explosive = False
         self.explosive = None
-        self.text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 14)
+        self.text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Libre.ttf'), 14)
         self.timer = 0
         self.pause_time = 0
         self.pause = False
