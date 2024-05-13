@@ -274,6 +274,16 @@ def load_sound(sound_name):
             pygame.mixer.stop()
             made_goal_sound.play()
 
+def get_high_score_from_file():
+    high_scores = []
+    with open(high_score_file, "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            time_score = line.strip().split(": ")
+            time = time_score[0]
+            score = int(time_score[1])
+            high_scores.append({"zaman": time, "puan": score})
+    return high_scores
 def get_high_score_as_text():
     high_scores = get_high_score_from_file()
     text = ""
