@@ -134,3 +134,42 @@ MoleWithDiamond_point = 605
 Skull_point = 20
 Bone_point = 5
 
+score = 0
+goal = 650
+goalAddOn = 275
+def get_score():
+    return score
+def set_score(new_score):
+    global score
+    score = new_score
+
+def get_goal():
+    return goal
+def set_goal(new_goal):
+    global goal
+    goal = new_goal
+
+pause = False
+def get_pause():
+    return pause
+def set_pause(new_pause):
+    global pause
+    pause = new_pause
+
+start_time = None
+def get_time():
+    return start_time
+
+def set_time(new_pause):
+    global start_time
+    start_time = new_pause
+
+current_level = 1
+def get_level():
+    return current_level
+def set_level(new_level):
+    global current_level
+    current_level = new_level
+
+high_score_file = "high_scores.txt"
+high_scores = []
