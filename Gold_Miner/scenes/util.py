@@ -131,11 +131,112 @@ def random_level(level_number):
 
 
 # Puanı ekrana çiz
-def draw_point(rope, dt, miner):
-    if rope.text == "dynamite" and rope.text_direction != "None":
+def draw_point(rope,dt,miner):
+    if rope.text == "dynamite" and rope.text_direction !="None":
         rope.time_text -= dt
         if rope.x_text > 500:
-            rope.text_size += dt * rope.speed / 5
+            rope.text_size += dt*rope.speed /(5)
+        elif rope.text_size > 30 and rope.text_size < 46:
+            rope.time_text = 0.4
+            rope.text_size -= dt*rope.speed /(5)
+        elif rope.text_size > 16 and rope.time_text < 0:
+            rope.text_size -= dt*rope.speed /(25)
+        if rope.time_text < 0:
+            if rope.text_direction == "left":
+                rope.x_text -= dt * rope.speed
+                if rope.x_text <= 500:  # Reached left boundary, change direction
+                    rope.text_direction = "right"
+            elif rope.text_direction == "right":
+                rope.x_text += dt * rope.speed
+                if rope.x_text >= 700:  # Reached right boundary, change direction
+                    rope.text_direction = "None"
+        screen.blit(dynamite_image,(rope.x_text,10))
+    elif rope.text == "strength" and rope.text_direction !="None":
+        rope.time_text -= dt
+        miner.state = 3
+        if rope.x_text > 400:
+            rope.text_size += dt*rope.speed /(8)
+        elif rope.text_size > 30 and rope.text_size < 46:
+            rope.time_text = 0.4
+            rope.text_size -= dt*rope.speed /(5)
+        elif rope.text_size > 16 and rope.time_text < 0:
+            rope.text_size -= dt*rope.speed
+        if rope.time_text < 0:
+            if rope.text_direction == "left":
+                rope.x_text -= dt * rope.speed
+                if rope.x_text <= 400:  # Reached left boundary, change direction
+                    rope.text_direction = "right"
+            elif rope.text_direction == "right":
+                rope.text_size -= dt*rope.speed /(5)
+                if rope.text_size <= 0:  # Reached right boundary, change direction
+                    miner.state = 3
+                    rope.text_direction = "None"
+        text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), int(rope.text_size))
+        screen.blit(text_font.render("Sức mạnh", True, (0, 15, 0)), (rope.x_text, rope.y_text))
+    elif rope.text != "" and rope.x_text > 120 and rope.text_direction !="None": # show tiền
+        rope.time_text -= dt
+        if rope.x_text > 500:
+            rope.text_size += dt*rope.speed /(5)
+        elif rope.text_size > 30 and rope.text_size < 46:
+            rope.time_text = 0.2
+            rope.text_size -= dt*rope.speed /(5)
+        elif rope.text_size > 16 and rope.time_text < 0:
+            rope.text_size -= dt*rope.speed /(25)
+        if rope.time_text < 0:
+            rope.x_text -= dt*rope.speed
+        text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), int(rope.text_size))
+        screen.blit(text_font.render("+$"+rope.text, True, (0, 15, 0)), (rope.x_text, rope.y_text))
+
+def blit_text(surface, text, pos, font, color=pygame.Color('black')):
+    words = [word.split(' ') for word in text.splitlines()]  # 2D array where each row is a list of words.
+    space = font.size(' ')[0]  # The width of a space.
+    max_width, max_height = surface.get_size()
+    x, y = pos
+    for line in words:
+        for word in line:
+            word_surface = font.render(word, 0, color)
+            word_width, word_height = word_surface.get_size()
+            if x + word_width >= max_width:
+                x = pos[0]  # Reset the x.
+                y += word_height  # Start on new row.
+            surface.blit(word_surface, (x, y))
+            x += word_width + space
+        x = pos[0]  # Reset the x.
+        y += word_height  # Start on new row.
+def blit_nor_text(surface, text_in, pos, font, color=pygame.Color('black')):
+    text = font.render(text_in, True, color)
+    surface.blit(text,text.get_rect(center = pos))
+def is_enough_money(item_price):
+    if item_price > get_score():
+        return False
+    return True
+def buy_item(item_id,price):
+    match item_id:
+        case 1: #rock_collectors_book
+            if is_enough_money(price):
+                set_score(get_score()-price)
+                return True
+            else: return False
+        case 2: #strength_drink
+            if is_enough_money(price):
+                set_score(get_score()-price)
+                return True
+            else: return False
+        case 3: #gem_polish
+            if is_enough_money(price):
+                set_score(get_score()-price)
+                return True
+            else: return False
+        case 4: #clover
+            if is_enough_money(price):
+                set_score(get_score()-price)
+                return True
+            else: return False
+        case 5: #dynamite
+            if is_enough_money(price):
+                set_score(get_score()-price)
+                return True
+            else: return False
 
 pygame.mixer.set_num_channels(8)
 voice1 = pygame.mixer.Channel(1)
@@ -173,3 +274,30 @@ def load_sound(sound_name):
             pygame.mixer.stop()
             made_goal_sound.play()
 
+def get_high_score_as_text():
+    high_scores = get_high_score_from_file()
+    text = ""
+    for score in high_scores:
+        text += str(score["zaman"]) + "          " + str(score["puan"]) + "\n"
+    if text == "":
+        text = "Yüksek puan listesi bulunmamaktadır."
+    return text
+
+def write_high_score(score):
+    # Dosyadan yüksek puan listesini al
+    high_scores = get_high_score_from_file()
+    # Şu anki zamanı al
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # Yeni yüksek puanı listeye ekle
+    high_scores.append({"zaman": current_time, "puan": score})
+
+    # Puanlara göre azalan şekilde sırala
+    high_scores = sorted(high_scores, key=lambda x: x["puan"], reverse=True)
+
+    # Sadece en yüksek 3 puanı al
+    high_scores = high_scores[:3]
+
+    # Yüksek puan listesini dosyaya yaz
+    with open(high_score_file, "w") as file:
+        for score in high_scores:
+            file.write(f"{score['zaman']}: {score['puan']}\n")

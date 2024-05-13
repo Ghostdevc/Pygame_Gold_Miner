@@ -43,7 +43,7 @@ class StartScene(object):
 class FinishScene(object):
     def __init__(self):
         super(FinishScene, self).__init__()
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Fernando.ttf'), 28)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 28)
         load_sound("goal_sound")
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
@@ -64,7 +64,7 @@ class FailureScene(object):
         super(FailureScene, self).__init__()
         write_high_score(get_score())
         load_sound("made_goal_sound")
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Fernando.ttf'), 24)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 24)
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
         screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
@@ -83,7 +83,7 @@ class WinScene(object):
         super(WinScene, self).__init__()
         write_high_score(get_score())
         load_sound("goal_sound")
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Fernando.ttf'), 24)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 24)
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
         screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
@@ -100,7 +100,7 @@ class WinScene(object):
 class HighScoreScene(object):
     def __init__(self):
         super(HighScoreScene, self).__init__()
-        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Fernando.ttf'), 24)
+        self.font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 24)
         self.continute = Button(1050,50,continue_img,0.5)
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
