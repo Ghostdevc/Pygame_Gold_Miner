@@ -43,11 +43,11 @@ miner_files = [
 ]
 miner_images = load_images(miner_files)
 
-# Angry man
+# Shopkeeper
 
 shopkeeper_files = [
-    "./assets/images/angryman_01.png",
-    "./assets/images/angryman_02.png"
+    "./assets/images/shopkeeper_01.png",
+    "./assets/images/shopkeeper_02.png"
 ]
 
 shopkeeper_images = load_images(shopkeeper_files)

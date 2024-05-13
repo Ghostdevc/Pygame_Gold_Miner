@@ -1,5 +1,3 @@
-import os
-
 from scenes.game_scenes import *
 import pygame
 
@@ -21,7 +19,7 @@ def main():
             manager.scene.update(screen)
         else:
             screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
-            text = font.render('Devam etmek için Boşluk tuşuna basın', True, (255, 255, 255))
+            text = font.render('Devam etmek için Space tuşuna basın', True, (255, 255, 255))
             screen.blit(text,text.get_rect(center = (screen_width/2,screen_height/2)))
 
         pygame.display.flip()

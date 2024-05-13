@@ -1,9 +1,8 @@
 from definitions import *
 from scenes.util import load_sound
 from entities.hook import Hook
-import math
 class Rope:
-    def __init__(self, x1, y1, speed,hoo_images,tnt=0,buffspeed=1):
+    def __init__(self, x1, y1, speed,hook_images,tnt=0,buffspeed=1):
         self.x1 = x1
         self.y1 = y1
         self.x2 = x1
@@ -73,9 +72,9 @@ class Rope:
                     else:
                         new_x2 = self.x2 - int(self.item.size/5)
                     self.item.update(new_x2 ,self.y2 + int(self.item.size/2.2))
-                    self.hook_image = 1 # hinh anh keo vật phẩm
+                    self.hook_image = 1
                 else:
-                    self.hook_image = 2 # hinh anh keo k co gì
+                    self.hook_image = 2
                 if self.length <= 50:
                     if self.item != None :
                         if self.item.point > 0 and self.is_use_TNT == False:
