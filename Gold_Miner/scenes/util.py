@@ -1,3 +1,6 @@
+import os
+
+import pygame
 from definitions import *
 from entities.gold import Gold
 from entities.tnt import TNT
@@ -88,6 +91,9 @@ def load_items(items_data, is_clover=False, is_gem=False, is_rock=False):
         items.append(load_item(item, is_clover, is_gem, is_rock))
     return items
 
+def load_sound(sound_name):
+    sound_path = os.path.join("assets", "sounds", f"{sound_name}.wav")
+    return pygame.mixer.Sound(sound_path)
 
 # Seviye yükleme işlemi
 def load_level(level, is_clover, is_gem, is_rock):
@@ -130,3 +136,40 @@ def draw_point(rope, dt, miner):
         rope.time_text -= dt
         if rope.x_text > 500:
             rope.text_size += dt * rope.speed / 5
+
+pygame.mixer.set_num_channels(8)
+voice1 = pygame.mixer.Channel(1)
+voice2 = pygame.mixer.Channel(2)
+voice3 = pygame.mixer.Channel(3)
+voice4 = pygame.mixer.Channel(4)
+voice5 = pygame.mixer.Channel(5)
+voice6 = pygame.mixer.Channel(6)
+def load_sound(sound_name):
+    match sound_name:
+        case "explosive_sound":
+            pygame.mixer.stop()
+            voice1.play(explosive_sound)
+        case "goal_sound":
+            pygame.mixer.stop()
+            voice2.play(goal_sound)
+        case "grab_back_sound":
+            voice4.stop()
+            if not voice3.get_busy():
+                voice3.play(grab_back_sound)
+        case "grab_start_sound":
+            if not voice4.get_busy():
+                voice4.play(grab_start_sound)
+        case "hook_reset_sound":
+            voice3.stop()
+            if not voice5.get_busy() or not voice1.get_busy():
+                voice5.play(hook_reset_sound)
+        case "high_value_sound":
+            high_value_sound.play()
+        case "normal_value_sound":
+            normal_value_sound.play()
+        case "money_sound":
+            money_sound.play()
+        case "made_goal_sound":
+            pygame.mixer.stop()
+            made_goal_sound.play()
+
