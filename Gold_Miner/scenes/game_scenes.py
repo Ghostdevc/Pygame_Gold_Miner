@@ -116,3 +116,66 @@ class HighScoreScene(object):
         if self.continute.is_click():
             self.manager.go_to(StartScene())
 
+
+class GameScene(Scene):
+    def __init__(self, level, tnt=0, speed=1, is_clover=False, is_gem=False, is_rock=False):
+        super(GameScene, self).__init__()
+        self.level = level
+        self.miner = Miner(620, -7, 5)
+        self.rope = Rope(643, 45, 300, hoo_images, tnt, speed)
+        self.bg, self.items = load_level(random_level(self.level), is_clover, is_gem, is_rock)
+        # self.bg,self.items = load_level("LDEBUG")
+        self.play_Explosive = False
+        self.explosive = None
+        self.text_font = pygame.font.Font(os.path.join("assets", "fonts", 'Teacher Students.otf'), 14)
+        self.timer = 0
+        self.pause_time = 0
+        self.pause = False
+        self.exit_button = Button(1050, 5, exit_image, 0.25)
+        self.next_button = Button(950, 0, next_image, 0.4)
+
+    def render(self, screen):
+        dt = clock.tick(60) / 1000
+        if (self.miner.state == 1):
+            for item in self.items:
+                if is_collision(self.rope, item):
+                    self.rope.item = item
+                    self.rope.item.is_move = False
+                    if item.is_explosive == True:
+                        # pygame.mixer.stop()
+                        load_sound("explosive_sound")
+                        explosive_item(item, self.items)
+                    self.rope.state = 'retracting'
+                    self.items.remove(item)
+                    break
+        if self.rope.state == 'retracting' and not (self.rope.is_use_TNT):
+            self.miner.state = 2
+        screen.blit(bg_top, (0, 0))
+        screen.blit(self.bg, (0, 72))
+        self.exit_button.render(screen)
+        self.next_button.render(screen)
+        # Draw item
+        for item in self.items:
+            item.draw(dt, screen)
+
+        if (self.play_Explosive == True and self.explosive != None):
+            # pygame.mixer.stop()
+            # explosive_sound.play()
+            load_sound("explosive_sound")
+            self.explosive.draw(screen)
+            self.explosive.update(dt)
+            if (self.explosive.is_exit):
+                del self.explosive
+                self.play_Explosive = False
+                self.miner.is_TNT = False
+                self.miner.state = 0
+                self.rope.is_use_TNT = False
+        for i in range(self.rope.have_TNT):
+            screen.blit(dynamite_image, (725 + i * 25, 10))
+        # Update sprite
+        self.miner.update(dt)
+        self.miner.draw(screen)
+        self.rope.update(self.miner, dt, screen)
+        self.rope.draw(screen)
+        draw_point(self.rope, dt, self.miner)
+

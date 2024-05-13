@@ -1,5 +1,5 @@
 import random
-from define import questionBag
+from definitions import questionBag
 class QuestionBag:
     def __init__(self,x,y,lucky=1):
         self.x = x
