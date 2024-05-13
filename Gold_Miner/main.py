@@ -15,6 +15,7 @@ def main():
             running = False
             return
         manager.scene.handle_events(pygame.event.get())
+
         if get_pause() == False:
             manager.scene.render(screen)
             manager.scene.update(screen)
@@ -22,6 +23,7 @@ def main():
             screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
             text = font.render('Devam etmek için Boşluk tuşuna basın', True, (255, 255, 255))
             screen.blit(text,text.get_rect(center = (screen_width/2,screen_height/2)))
+
         pygame.display.flip()
 
 if __name__ == "__main__":

@@ -9,6 +9,10 @@ from entities.rock import Rock
 from entities.mole import Mole
 from entities.question import QuestionBag
 import datetime
+import random
+import json
+import sys
+import math
 
 
 # Döngü ve nesne arasındaki çarpışmayı kontrol et

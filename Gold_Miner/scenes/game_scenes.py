@@ -7,6 +7,9 @@ from entities.button import Button
 from entities.angryman import Shopkeeper
 from scenes.scene import Scene
 from scenes.util import *
+import random
+import sys
+
 clock = pygame.time.Clock()
 
 
@@ -70,7 +73,7 @@ class FailureScene(object):
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
         screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
-        screen.blit(text_game_image,text_game_image.get_rect(center = (screen_width/2,200)))
+        #screen.blit(text_game_image,text_game_image.get_rect(center = (screen_width/2,200)))
         text = 'Yeterli puana ulaşamadınız!\nYeniden başlamak için Boşluk tuşuna basın'
         blit_text(screen,text,(377,350),self.font,color=(255,255,255))
     def update(self,screen):
@@ -89,7 +92,7 @@ class WinScene(object):
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
         screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
-        screen.blit(text_game_image,text_game_image.get_rect(center = (screen_width/2,200)))
+        #screen.blit(text_game_image,text_game_image.get_rect(center = (screen_width/2,200)))
         text = 'Bu oyunu kazandınız!\nYeniden başlamak için Boşluk tuşuna basın'
         blit_text(screen,text,(377,300),self.font,color=(255,255,255))
     def update(self,screen):
@@ -107,7 +110,7 @@ class HighScoreScene(object):
     def render(self, screen):
         screen.blit(cut_scene,(0,0))
         screen.blit(panel_image,panel_image.get_rect(center = (screen_width/2,screen_height/2)))
-        screen.blit(text_game_image,text_game_image.get_rect(center = (screen_width/2,200)))
+        #screen.blit(text_game_image,text_game_image.get_rect(center = (screen_width/2,200)))
         screen.blit(self.font.render('YÜKSEK SKOR', True, (255, 255, 255)), (560, 300))
         self.continute.render(screen)
         text = get_high_score_as_text()
