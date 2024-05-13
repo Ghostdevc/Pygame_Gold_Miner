@@ -1,7 +1,7 @@
 from definitions import tnt_image,empty
 from entities.explosive import Explosive
 class TNT:
-    def __init__(self,x,y):
+    def __init__(self,x,y, tnt_image):
         self.x = x
         self.y = y
         self.size = 30
