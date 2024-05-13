@@ -73,10 +73,11 @@ hook_files = [
     "./assets/images/kanca_03.png"
 ]
 hook_images = load_images(hook_files)
-
+hight_score = pygame.image.load('./assets/images/hight_score.png')
 panel_image = pygame.image.load('./assets/images/panel.png')
 table_image = pygame.image.load('./assets/images/shop_table.png')
 dialog_image = pygame.image.load('./assets/images/ui_dialog.png')
+continue_img = pygame.image.load('./assets/images/continue.png')
 
 
 
@@ -133,5 +134,3 @@ MoleWithDiamond_point = 605
 Skull_point = 20
 Bone_point = 5
 
-
-#contiune ve hight score eklenecek
