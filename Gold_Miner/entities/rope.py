@@ -1,6 +1,7 @@
 from definitions import *
 from scenes.util import load_sound
 from entities.hook import Hook
+import math
 class Rope:
     def __init__(self, x1, y1, speed,hook_images,tnt=0,buffspeed=1):
         self.x1 = x1

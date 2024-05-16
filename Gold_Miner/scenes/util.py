@@ -10,6 +10,7 @@ import random
 import json
 import sys
 import math
+import os
 
 
 # Tel ve öğe arasındaki çarpışmayı kontrol edin

@@ -5,6 +5,7 @@ from entities.button import Button
 from entities.shopkeeper import Shopkeeper
 from scenes.scene import Scene
 from scenes.util import *
+import os
 
 clock = pygame.time.Clock()
 
@@ -380,7 +381,7 @@ class GameScene(Scene):
                     else:  # UNPAUSE
                         set_pause(False)
                         set_time(get_time() + pygame.time.get_ticks() / 1000 - self.pause_time)
-                if e.key == pygame.K_ESCAPE:
+                #if e.key == pygame.K_ESCAPE:
                 if (e.key == pygame.K_DOWN and self.rope.timer <= 0):  # expanding
                     self.miner.state = 1
                 if e.key == pygame.K_UP:  # retracting
